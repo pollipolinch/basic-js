@@ -21,47 +21,45 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 class VigenereCipheringMachine {
   direct = true;
-  alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   constructor(direction = true) {
     this.direct = direction;
   }
+  encrypt = (sms, keyword) => this.vigenere(sms, keyword);
+  decrypt = (sms, keyword) => this.vigenere(sms, keyword, false);
 
-  encrypt = (message, keyword) => this.vigenere(message, keyword);
-  decrypt = (message, keyword) => this.vigenere(message, keyword, false);
-
-  vigenere(message, keyword, encrypt = true) {
-    if(!message || !keyword) throw new Error("Incorrect arguments!");
-    
-    let str='';
-    message = message.toUpperCase();
+  vigenere(sms, keyword, encrypt = true) {
+    if(!sms || !keyword) throw new Error("Incorrect arguments!");
+    let word='';
+    sms = sms.toUpperCase();
     keyword = keyword.toUpperCase();
 
-    for(let i = 0, j=0; i < message.length; i++) {
-      if(message[i].match(/[A-Z]/i)) {
-        let shift1=this.getSift(message[i], this.alphabet);  
-        let shift2=this.getSift(this.getChar(j,keyword), this.alphabet); 
-        let shift;
+    for(let i = 0, j=0; i < sms.length; i++) {
+      if(sms[i].match(/[A-Z]/i)) {
+        let shear1=this.getSift(sms[i], this.letter);  
+        let shear2=this.getSift(this.getChar(j,keyword), this.letter); 
+        let shear;
         if (encrypt) {
-          shift = shift1 + shift2;
+          shear = shear1 + shear2;
         }
         else {
-          shift = shift1 - shift2;
-          if (shift<0)  shift = this.alphabet.length + shift1 - shift2;
+          shear = shear1 - shear2;
+          if (shear<0)  shear = this.letter.length + shear1 - shear2;
         }
-        str += this.getChar(shift, this.alphabet);
+        word += this.getChar(shear, this.letter);
         j++;
       }
       else {
-        str += message[i];
+        word += sms[i];
       }
     }
-    return (this.direct) ? str : str.split('').reverse().join('');
+    return (this.direct) ? word : word.split('').reverse().join('');
   }
-  getSift(char, alphabet) {
-    return alphabet.indexOf(char);
+  getSift(char, letter) {
+    return letter.indexOf(char);
   }
-  getChar(shift, alphabet) {
-    return alphabet[shift % alphabet.length];
+  getChar(shear, letter) {
+    return letter[shear % letter.length];
   }
 }
 

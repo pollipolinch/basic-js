@@ -18,18 +18,15 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
-  if (
-    typeof sampleActivity !== "string" ||
+  if (typeof sampleActivity !== "string" ||
     !isFinite(sampleActivity) ||
     sampleActivity <= 0 ||
     sampleActivity > MODERN_ACTIVITY
   )
-    return false;
-
-  const RADIOACTIVE_DECAY_CONSTANT = 0.693 / HALF_LIFE_PERIOD;
-
+  return false;
+  const constanta = 0.693 / HALF_LIFE_PERIOD;
   return Math.ceil(
-    Math.log(MODERN_ACTIVITY / +sampleActivity) / RADIOACTIVE_DECAY_CONSTANT
+    Math.log(MODERN_ACTIVITY / +sampleActivity) / constanta
   );
 }
 

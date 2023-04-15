@@ -35,10 +35,7 @@ function repeater(str, options) {
  for(let j = 1; j <= options.additionRepeatTimes; j++) {
        addition.push(`${options.addition}`); 
      }
-  let allAddition = addition.join(`${options.additionSeparator}`)
-   console.log(allAddition)
-   
-  console.log(options.repeatTimes)
+  let allAddition = addition.join(`${options.additionSeparator}`)   
    for(let i = 1; i <= options.repeatTimes; i++) {
       {
        result.push(`${str}${allAddition}`); 
@@ -46,7 +43,6 @@ function repeater(str, options) {
     
      
    }
-  console.log(result)
    return result.join(`${options.separator}`)
  }
 

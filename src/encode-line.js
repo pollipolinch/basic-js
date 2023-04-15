@@ -11,21 +11,21 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function encodeLine(str) {
- let result = ''
+ let solution = ''
  let count = 1
 for (let i = 0;i<str.length;i++){
   if(str[i]==str[i+1]){
     count = count+1
   }else{
 if(count>1){
-  result = result+ count+str[i]
+  solution = solution+ count+str[i]
   count = 1
 }else{
-  result = result+str[i]
+  solution = solution+str[i]
 }
   }
 }
-return result
+return solution
 }
 
 module.exports = {

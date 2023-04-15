@@ -16,10 +16,10 @@ function getSumOfDigits(n) {
   if(n < 10) { 
     return n;
   }
-  let array = n.toString();
-   let arr2 = array.split('')
+  let arr = n.toString();
+   let array2 = arr.split('')
   .map(item => +item);
-  let res = arr2.reduce((sum, cur) => sum + cur, 0);
+  let res = array2.reduce((sum, cur) => sum + cur, 0);
   if(res >= 10) {
     return getSumOfDigits(res)
   } else {
